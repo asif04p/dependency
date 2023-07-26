@@ -1,0 +1,15 @@
+[Unit]
+Description=interactsh-client daemon
+After=network.target
+
+[Service]
+User=root
+Group=root
+WorkingDirectory=/home/ubuntu
+Environment='PATH=/usr/local/bin'
+ExecStart=/bin/sh -c 'interactsh-client -s "enter_your_domain_name_here" -t "enter_your_password_here" -n 0 | notify -silent'
+ExecReload=/bin/kill -s HUP $MAINPID
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

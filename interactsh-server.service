@@ -1,0 +1,15 @@
+[Unit]
+Description=interactsh-server daemon
+After=network.target
+
+[Service]
+User=root
+Group=root
+WorkingDirectory=/home/ubuntu
+Environment='PATH=/usr/local/bin'
+ExecStart=interactsh-server -domain "enter_your_domain_name_here" -t "enter_your_password_here" -ip "enter the public IP of your VPS" -ldap -wildcard
+ExecReload=/bin/kill -s HUP $MAINPID
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
